@@ -1,16 +1,22 @@
-# This is a sample Python script.
+import win32gui, win32api, win32con
+import time
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+hwnd = win32gui.FindWindow(None, 'BlueStacks')
+hwndChild = win32gui.GetWindow(hwnd, win32con.GW_CHILD)
+hwndChild2 = win32gui.GetWindow(hwndChild, win32con.GW_CHILD)
+
+win32gui.SendMessage(hwnd, win32con.WM_ACTIVATE, win32con.WA_CLICKACTIVE, 0)
+
+time.sleep(1)  # Without this delay, inputs are not executing in my case
+
+win32api.PostMessage(hwndChild2, win32con.WM_KEYDOWN, win32con.VK_F1, 0)
+time.sleep(.5)
+win32api.PostMessage(hwndChild2, win32con.WM_KEYUP, win32con.VK_F1, 0)
 
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
 
 
-# Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    print_hi('PyCharm')
+    # Run Code blow
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+
